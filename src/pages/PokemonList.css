@@ -1,10 +1,18 @@
 /** @format */
 
+.Wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
 .Screen {
 	height: 100vh;
 	background-color: burlywood;
+}
+.Sitename {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	padding: 24px;
 }

@@ -4,40 +4,43 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+
 import {
 	Button,
 	CardActionArea,
 	CardActions,
 } from "@mui/material";
+import "../assets/data.json";
 
-type Props = {};
+type Pokemon = {
+	title: string;
+	content: string;
+	createdAt: string;
+};
 
-const ListItemCard = (props: Props) => {
+const ListItemCard = (
+	props: Pokemon
+) => {
 	return (
 		<div style={{ width: 400 }}>
 			<Card
 				sx={{ maxWidth: 345 }}
 				style={{ margin: 8 }}>
 				<CardActionArea>
-					<CardMedia
-						component="img"
-						height="140"
-						image="/static/images/cards/contemplative-reptile.jpg"
-						alt="green iguana"
-					/>
 					<CardContent>
 						<Typography
 							gutterBottom
 							variant="h5"
 							component="div">
-							Name
+							Name {props.title}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
 					<Button
 						size="small"
-						color="primary">
+						color="primary"
+						href="pokemondetail">
 						See More Button
 					</Button>
 				</CardActions>
