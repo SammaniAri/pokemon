@@ -12,9 +12,9 @@ import {
 
 type Props = {};
 
-const PokemonCard = (props: Props) => {
+const ListItemCard = (props: Props) => {
 	return (
-		<div>
+		<div style={{ width: 400 }}>
 			<Card
 				sx={{ maxWidth: 345 }}
 				style={{ margin: 8 }}>
@@ -32,30 +32,17 @@ const PokemonCard = (props: Props) => {
 							component="div">
 							Name
 						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary">
-							<strong>
-								LIST OF ABILITIES
-							</strong>
-							are a widespread group of
-							squamate reptiles, with
-							over 6,000 species,
-							ranging across all
-							continents except
-							Antarctica
-						</Typography>
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
 					<Button
 						size="small"
 						color="primary">
-						Go Back Button
+						See More Button
 					</Button>
 				</CardActions>
 			</Card>
 		</div>
 	);
 };
-export default PokemonCard;
+export default ListItemCard;
