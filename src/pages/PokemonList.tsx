@@ -1,14 +1,47 @@
 /** @format */
-
+import {
+	useEffect,
+	useState,
+} from "react";
 import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
 import data from "../assets/data.json";
 import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
 
-/** @format */
+const BASE_URL =
+	"https://pokeapi.co/api/v2/pokemon/?offset=0&limit=8";
+
+type Pokemon = {
+	name: string;
+	url: string;
+};
+
+type PokemonResult = {
+	count: number;
+	next: string;
+	previous: string;
+	results: Pokemon[];
+};
 
 const PokemonList = () => {
+	const [pokemons, setPokemons] =
+		useState<Pokemon[]>([]);
+	useEffect(() => {
+		const fetchPokemons = async () => {
+			const response = await fetch(
+				`${BASE_URL}`
+			);
+			const pokemons =
+				(await response.json()) as PokemonResult;
+
+			console.log(pokemons);
+			setPokemons(pokemons.results);
+		};
+
+		fetchPokemons();
+	}, []);
+
 	return (
 		<div className="Screen">
 			<div className="Sitename">
@@ -18,14 +51,13 @@ const PokemonList = () => {
 			</div>
 
 			<div className="Wrapper">
-				{data.map((item) => (
+				{pokemons.map((item) => (
 					<div
-						key={item.id}
+						key={item.name}
 						className="component-container">
 						<ListItemCard
-							title={item.title}
-							content={item.content}
-							createdAt={item.createdAt}
+							name={item.name}
+							url={item.url}
 						/>
 					</div>
 				))}

@@ -13,9 +13,8 @@ import {
 import "../assets/data.json";
 
 type Pokemon = {
-	title: string;
-	content: string;
-	createdAt: string;
+	name: string;
+	url: string;
 };
 
 const ListItemCard = (
@@ -32,7 +31,7 @@ const ListItemCard = (
 							gutterBottom
 							variant="h5"
 							component="div">
-							Name {props.title}
+							{props.name}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
