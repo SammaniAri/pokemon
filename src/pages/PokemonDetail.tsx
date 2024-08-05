@@ -1,5 +1,9 @@
 /** @format */
-import { useContext } from "react";
+import {
+	useContext,
+	useState,
+	useEffect,
+} from "react";
 import { PokemonContext } from "../context/PokemonContext";
 import "./PokemonDetail.css";
 import Card from "@mui/material/Card";
@@ -12,17 +16,53 @@ import {
 	CardActionArea,
 	CardActions,
 } from "@mui/material";
-type Props = {};
 
-const PokemonDetail = (
-	props: Props
-) => {
+type PokemonDetail = {
+	abilities: Ability[];
+	sprites: Sprite;
+};
+type Ability = {
+	ability: AbilityNameAndUrl;
+	is_hidden: boolean;
+	slot: number;
+};
+
+type AbilityNameAndUrl = {
+	name: string;
+	url: string;
+};
+
+type Sprite = {
+	back_default: string;
+};
+const PokemonDetail = () => {
 	const pokemonContext = useContext(
 		PokemonContext
 	);
 	console.log(
 		pokemonContext?.selectedPokemon
 	);
+	const selectedPokemon =
+		pokemonContext?.selectedPokemon;
+
+	const BASE_URL = selectedPokemon?.url;
+	const [
+		pokemonDetail,
+		setPokemonDetail,
+	] = useState<PokemonDetail>();
+
+	useEffect(() => {
+		const fetchAbilities = async () => {
+			const response = await fetch(
+				`${BASE_URL}`
+			);
+			const pokemonDetails =
+				(await response.json()) as PokemonDetail;
+			console.log(pokemonDetails);
+			setPokemonDetail(pokemonDetails);
+		};
+		fetchAbilities();
+	}, []);
 	return (
 		<div className="DetailScreen">
 			<Card
@@ -40,20 +80,27 @@ const PokemonDetail = (
 							gutterBottom
 							variant="h5"
 							component="div">
-							Name
+							{selectedPokemon
+								? selectedPokemon.name
+								: "Name"}
 						</Typography>
 						<Typography
 							variant="body2"
-							color="text.secondary">
+							color="text.secondary"
+							width="400px">
 							<strong>
 								LIST OF ABILITIES
 							</strong>
-							are a widespread group of
-							squamate reptiles, with
-							over 6,000 species,
-							ranging across all
-							continents except
-							Antarctica
+							{pokemonDetail?.abilities.map(
+								(item) => (
+									<p
+										key={
+											item.ability.url
+										}>
+										{item.ability.name}
+									</p>
+								)
+							)}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
