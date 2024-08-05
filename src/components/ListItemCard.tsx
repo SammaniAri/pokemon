@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { NavLink } from "react-router-dom";
 
 import {
 	Button,
@@ -36,12 +37,13 @@ const ListItemCard = (
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<Button
-						size="small"
-						color="primary"
-						href="pokemondetail">
-						See More Button
-					</Button>
+					<NavLink to="pokemondetail">
+						<Button
+							size="small"
+							color="primary">
+							See More Button
+						</Button>
+					</NavLink>
 				</CardActions>
 			</Card>
 		</div>

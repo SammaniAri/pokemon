@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { NavLink } from "react-router-dom";
 import {
 	Button,
 	CardActionArea,
@@ -49,12 +50,13 @@ const PokemonDetail = (
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<Button
-						size="small"
-						color="primary"
-						href="/">
-						Go Back Button
-					</Button>
+					<NavLink to="/">
+						<Button
+							size="small"
+							color="primary">
+							Go Back Button
+						</Button>
+					</NavLink>
 				</CardActions>
 			</Card>
 		</div>
