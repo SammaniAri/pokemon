@@ -7,14 +7,10 @@ import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
 import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
+import { Pokemon } from "../context/PokemonContext";
 
 const BASE_URL =
 	"https://pokeapi.co/api/v2/pokemon/?offset=0&limit=8";
-
-type Pokemon = {
-	name: string;
-	url: string;
-};
 
 type PokemonResult = {
 	count: number;

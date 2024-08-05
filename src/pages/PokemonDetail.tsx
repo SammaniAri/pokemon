@@ -1,4 +1,6 @@
 /** @format */
+import { useContext } from "react";
+import { PokemonContext } from "../context/PokemonContext";
 import "./PokemonDetail.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -15,6 +17,12 @@ type Props = {};
 const PokemonDetail = (
 	props: Props
 ) => {
+	const pokemonContext = useContext(
+		PokemonContext
+	);
+	console.log(
+		pokemonContext?.selectedPokemon
+	);
 	return (
 		<div className="DetailScreen">
 			<Card
