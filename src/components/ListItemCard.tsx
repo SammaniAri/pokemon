@@ -5,6 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import {
 	Button,
@@ -12,6 +14,7 @@ import {
 	CardActions,
 } from "@mui/material";
 import "../assets/data.json";
+import { PokemonContext } from "../context/PokemonContext";
 
 type Pokemon = {
 	name: string;
@@ -21,6 +24,20 @@ type Pokemon = {
 const ListItemCard = (
 	props: Pokemon
 ) => {
+	const navigate = useNavigate();
+	const pokemonContext = useContext(
+		PokemonContext
+	);
+	const navigateToDetail = (
+		selectedName: string,
+		selectedUrl: string
+	) => {
+		pokemonContext?.setSelectedPokemon({
+			name: selectedName,
+			url: selectedUrl,
+		});
+		navigate("/pokemondetail");
+	};
 	return (
 		<div style={{ width: 400 }}>
 			<Card
@@ -37,13 +54,17 @@ const ListItemCard = (
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<NavLink to="pokemondetail">
-						<Button
-							size="small"
-							color="primary">
-							See More Button
-						</Button>
-					</NavLink>
+					<Button
+						size="small"
+						color="primary"
+						onClick={() =>
+							navigateToDetail(
+								props.name,
+								props.url
+							)
+						}>
+						See More Button
+					</Button>
 				</CardActions>
 			</Card>
 		</div>

@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { PokemonProvider } from "./context/PokemonContext";
 
 const root = ReactDOM.createRoot(
 	document.getElementById(
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<PokemonProvider>
+				<App />
+			</PokemonProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 );
