@@ -1,60 +1,47 @@
 /** @format */
-import "./PokemonDetail.css";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
+
 import {
 	Button,
 	CardActionArea,
 	CardActions,
 } from "@mui/material";
-type Props = {};
+import "../assets/data.json";
 
-const PokemonDetail = (
-	props: Props
+type Pokemon = {
+	name: string;
+	url: string;
+};
+
+const ListItemCard = (
+	props: Pokemon
 ) => {
 	return (
-		<div className="DetailScreen">
+		<div style={{ width: 400 }}>
 			<Card
 				sx={{ maxWidth: 345 }}
 				style={{ margin: 8 }}>
 				<CardActionArea>
-					<CardMedia
-						component="img"
-						height="140"
-						image="/logo512.png"
-						alt="green iguana"
-					/>
 					<CardContent>
 						<Typography
 							gutterBottom
 							variant="h5"
 							component="div">
-							Name
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary">
-							<strong>
-								LIST OF ABILITIES
-							</strong>
-							are a widespread group of
-							squamate reptiles, with
-							over 6,000 species,
-							ranging across all
-							continents except
-							Antarctica
+							{props.name}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<NavLink to="/">
+					<NavLink to="pokemondetail">
 						<Button
 							size="small"
 							color="primary">
-							Go Back Button
+							See More Button
 						</Button>
 					</NavLink>
 				</CardActions>
@@ -62,4 +49,4 @@ const PokemonDetail = (
 		</div>
 	);
 };
-export default PokemonDetail;
+export default ListItemCard;
