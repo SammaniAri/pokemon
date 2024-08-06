@@ -34,33 +34,30 @@ The Pokémon Explorer App is a mini web application built using React and TypeSc
 
 ### Clone the Repository
 
-````bash
-- git clone git@github.com:SammaniAri/pokemon.git
-- cd pokemon
+git clone git@github.com:SammaniAri/pokemon.git
+
+cd pokemon
 
 ### Install Dependencies
-- Make sure you have Node.js and npm installed. Then run:
-```bash
-- npm install
-- Run the Application
-- bash
-- Copy code
-- npm start
-- The app will be available at http://localhost:3000.
+
+Make sure you have Node.js and npm installed.
+
+Then run:
+
+npm install
+
+npm start
+
+The app will be available at http://localhost:3000.
 
 ## Styling
-- The application uses CSS as well as Material UI for styling to ensure that the design is responsive to provide a good user experience on both desktop and mobile devices.
+
+The application uses CSS as well as Material UI for styling to ensure that the design is responsive to provide a good user experience on both desktop and mobile devices.
 
 ## Acknowledgments
-- PokéAPI for providing the Pokémon data.
+
+PokéAPI for providing the Pokémon data.
 
 ## Contact
-- sammani.ari@gmail.com for any questions or feedback, please contact sammani.ari@gmail.com
 
-
-
-
-
-
-
-````
+For any questions or feedback, please contact sammani.ari@gmail.com
