@@ -2,9 +2,7 @@
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
@@ -42,7 +40,10 @@ const ListItemCard = (
 		<div style={{ width: 400 }}>
 			<Card
 				sx={{ maxWidth: 345 }}
-				style={{ margin: 8 }}>
+				style={{
+					margin: 8,
+					backgroundColor: "#fbffea",
+				}}>
 				<CardActionArea>
 					<CardContent>
 						<Typography
@@ -57,13 +58,14 @@ const ListItemCard = (
 					<Button
 						size="small"
 						color="primary"
+						variant="outlined"
 						onClick={() =>
 							navigateToDetail(
 								props.name,
 								props.url
 							)
 						}>
-						See More Button
+						See More
 					</Button>
 				</CardActions>
 			</Card>

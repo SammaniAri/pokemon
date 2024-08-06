@@ -15,6 +15,7 @@ import {
 	Button,
 	CardActionArea,
 	CardActions,
+	Box,
 } from "@mui/material";
 
 type PokemonDetail = {
@@ -33,7 +34,7 @@ type AbilityNameAndUrl = {
 };
 
 type Sprite = {
-	back_default: string;
+	front_default: string;
 };
 const PokemonDetail = () => {
 	const pokemonContext = useContext(
@@ -67,14 +68,30 @@ const PokemonDetail = () => {
 		<div className="DetailScreen">
 			<Card
 				sx={{ maxWidth: 345 }}
-				style={{ margin: 8 }}>
+				style={{
+					margin: 8,
+					backgroundColor: "#fbffea",
+				}}>
 				<CardActionArea>
-					<CardMedia
-						component="img"
-						height="140"
-						image="/logo512.png"
-						alt="green iguana"
-					/>
+					<Box
+						display="flex"
+						justifyContent="right"
+						alignItems="center"
+						height={200}>
+						<CardMedia
+							component="img"
+							style={{
+								height: 200,
+								width: 200,
+							}}
+							image={
+								pokemonDetail?.sprites
+									.front_default
+							}
+							alt="green iguana"
+						/>
+					</Box>
+
 					<CardContent>
 						<Typography
 							gutterBottom
@@ -111,8 +128,9 @@ const PokemonDetail = () => {
 					<NavLink to="/">
 						<Button
 							size="small"
-							color="primary">
-							Go Back Button
+							color="primary"
+							variant="outlined">
+							Go Back
 						</Button>
 					</NavLink>
 				</CardActions>
