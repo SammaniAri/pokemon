@@ -7,11 +7,8 @@ import {
 	useState,
 	useEffect,
 } from "react";
-type Props = {};
 
-const PokePagination = (
-	props: Props
-) => {
+const PokePagination = () => {
 	const pokemonContext = useContext(
 		PokemonContext
 	);

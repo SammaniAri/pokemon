@@ -15,73 +15,65 @@ import {
 	Button,
 	CardActionArea,
 	CardActions,
+	Box,
 } from "@mui/material";
+import {
+	Ability,
+	PokemonDetail,
+} from "../context/Domain";
 
-type PokemonDetail = {
-	abilities: Ability[];
-	sprites: Sprite;
-};
-type Ability = {
-	ability: AbilityNameAndUrl;
-	is_hidden: boolean;
-	slot: number;
-};
-
-type AbilityNameAndUrl = {
-	name: string;
-	url: string;
-};
-
-type Sprite = {
-	back_default: string;
-};
-const PokemonDetail = () => {
+const PokemonDetailComponent = () => {
 	const pokemonContext = useContext(
 		PokemonContext
-	);
-	console.log(
-		pokemonContext?.selectedPokemon
 	);
 	const selectedPokemon =
 		pokemonContext?.selectedPokemon;
 
-	const BASE_URL = selectedPokemon?.url;
 	const [
 		pokemonDetail,
 		setPokemonDetail,
-	] = useState<PokemonDetail>();
+	] = useState<PokemonDetail | null>();
 
 	useEffect(() => {
-		const fetchAbilities = async () => {
-			const response = await fetch(
-				`${BASE_URL}`
-			);
-			const pokemonDetails =
-				(await response.json()) as PokemonDetail;
-			console.log(pokemonDetails);
-			setPokemonDetail(pokemonDetails);
-		};
-		fetchAbilities();
-	}, []);
+		setPokemonDetail(
+			pokemonContext?.pokemonDetail
+		);
+	}, [pokemonContext?.pokemonDetail]);
 	return (
 		<div className="DetailScreen">
 			<Card
 				sx={{ maxWidth: 345 }}
-				style={{ margin: 8 }}>
+				style={{
+					margin: 8,
+					backgroundColor: "#fbffea",
+				}}>
 				<CardActionArea>
-					<CardMedia
-						component="img"
-						height="140"
-						image="/logo512.png"
-						alt="green iguana"
-					/>
+					<Box
+						display="flex"
+						justifyContent="right"
+						alignItems="center"
+						height={200}>
+						<CardMedia
+							component="img"
+							style={{
+								height: 200,
+								width: 200,
+							}}
+							image={
+								pokemonDetail?.sprites
+									?.front_default
+							}
+							alt="green iguana"
+						/>
+					</Box>
+
 					<CardContent>
 						<Typography
 							gutterBottom
 							variant="h5"
 							component="div">
 							{selectedPokemon
-								? selectedPokemon.name
+								? selectedPokemon
 								: "Name"}
 						</Typography>
 
@@ -93,12 +85,12 @@ const PokemonDetail = () => {
 								LIST OF ABILITIES
 							</Typography>
 							{pokemonDetail?.abilities.map(
-								(item) => (
+								(item: Ability) => (
 									<Typography
 										variant="body2"
 										color="text.secondary"
 										key={
-											item.ability.url
+											item.ability.name
 										}>
 										{item.ability.name}
 									</Typography>
@@ -111,8 +103,9 @@ const PokemonDetail = () => {
 					<NavLink to="/">
 						<Button
 							size="small"
-							color="primary">
-							Go Back Button
+							color="primary"
+							variant="outlined">
+							Go Back
 						</Button>
 					</NavLink>
 				</CardActions>
@@ -120,4 +113,4 @@ const PokemonDetail = () => {
 		</div>
 	);
 };
-export default PokemonDetail;
+export default PokemonDetailComponent;

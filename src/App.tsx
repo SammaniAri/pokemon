@@ -6,7 +6,7 @@ import {
 	Route,
 } from "react-router-dom";
 import PokemonList from "./pages/PokemonList";
-import PokemonDetail from "./pages/PokemonDetail";
+import PokemonDetailComponent from "./pages/PokemonDetail";
 
 function App() {
 	return (
@@ -18,7 +18,9 @@ function App() {
 				/>
 				<Route
 					path="pokemondetail"
-					element={<PokemonDetail />}
+					element={
+						<PokemonDetailComponent />
+					}
 				/>
 			</Routes>
 		</>

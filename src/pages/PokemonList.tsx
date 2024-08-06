@@ -8,11 +8,8 @@ import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
 import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
-import {
-	Pokemon,
-	PokemonResult,
-} from "../context/PokemonContext";
 import { PokemonContext } from "../context/PokemonContext";
+import { Pokemon } from "../context/Domain";
 
 const PokemonList = () => {
 	const pokemonContext = useContext(
@@ -32,6 +29,14 @@ const PokemonList = () => {
 
 	return (
 		<div className="Screen">
+			<img
+				src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+				alt="pikachu"
+				style={{
+					height: 200,
+					width: 200,
+				}}
+			/>
 			<div className="Sitename">
 				<Typography variant="h5">
 					Pokemon Explorer
@@ -49,7 +54,9 @@ const PokemonList = () => {
 						/>
 					</div>
 				))}
+			</div>
 
+			<div className="Pagi">
 				<PokePagination />
 			</div>
 		</div>
