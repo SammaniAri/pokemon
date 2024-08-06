@@ -84,24 +84,27 @@ const PokemonDetail = () => {
 								? selectedPokemon.name
 								: "Name"}
 						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-							width="400px">
-							<strong>
+
+						<div>
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								width="400px">
 								LIST OF ABILITIES
-							</strong>
+							</Typography>
 							{pokemonDetail?.abilities.map(
 								(item) => (
-									<p
+									<Typography
+										variant="body2"
+										color="text.secondary"
 										key={
 											item.ability.url
 										}>
 										{item.ability.name}
-									</p>
+									</Typography>
 								)
 							)}
-						</Typography>
+						</div>
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
