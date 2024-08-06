@@ -17,53 +17,28 @@ import {
 	CardActions,
 	Box,
 } from "@mui/material";
+import {
+	Ability,
+	PokemonDetail,
+} from "../context/Domain";
 
-type PokemonDetail = {
-	abilities: Ability[];
-	sprites: Sprite;
-};
-type Ability = {
-	ability: AbilityNameAndUrl;
-	is_hidden: boolean;
-	slot: number;
-};
-
-type AbilityNameAndUrl = {
-	name: string;
-	url: string;
-};
-
-type Sprite = {
-	front_default: string;
-};
-const PokemonDetail = () => {
+const PokemonDetailComponent = () => {
 	const pokemonContext = useContext(
 		PokemonContext
-	);
-	console.log(
-		pokemonContext?.selectedPokemon
 	);
 	const selectedPokemon =
 		pokemonContext?.selectedPokemon;
 
-	const BASE_URL = selectedPokemon?.url;
 	const [
 		pokemonDetail,
 		setPokemonDetail,
-	] = useState<PokemonDetail>();
+	] = useState<PokemonDetail | null>();
 
 	useEffect(() => {
-		const fetchAbilities = async () => {
-			const response = await fetch(
-				`${BASE_URL}`
-			);
-			const pokemonDetails =
-				(await response.json()) as PokemonDetail;
-			console.log(pokemonDetails);
-			setPokemonDetail(pokemonDetails);
-		};
-		fetchAbilities();
-	}, []);
+		setPokemonDetail(
+			pokemonContext?.pokemonDetail
+		);
+	}, [pokemonContext?.pokemonDetail]);
 	return (
 		<div className="DetailScreen">
 			<Card
@@ -86,7 +61,7 @@ const PokemonDetail = () => {
 							}}
 							image={
 								pokemonDetail?.sprites
-									.front_default
+									?.front_default
 							}
 							alt="green iguana"
 						/>
@@ -98,7 +73,7 @@ const PokemonDetail = () => {
 							variant="h5"
 							component="div">
 							{selectedPokemon
-								? selectedPokemon.name
+								? selectedPokemon
 								: "Name"}
 						</Typography>
 
@@ -110,12 +85,12 @@ const PokemonDetail = () => {
 								LIST OF ABILITIES
 							</Typography>
 							{pokemonDetail?.abilities.map(
-								(item) => (
+								(item: Ability) => (
 									<Typography
 										variant="body2"
 										color="text.secondary"
 										key={
-											item.ability.url
+											item.ability.name
 										}>
 										{item.ability.name}
 									</Typography>
@@ -138,4 +113,4 @@ const PokemonDetail = () => {
 		</div>
 	);
 };
-export default PokemonDetail;
+export default PokemonDetailComponent;

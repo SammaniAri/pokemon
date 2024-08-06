@@ -4,27 +4,25 @@ import React, {
 	useState,
 	useEffect,
 } from "react";
-export type PokemonResult = {
-	count: number;
-	next: string;
-	previous: string;
-	results: Pokemon[];
-};
-export type Pokemon = {
-	name: string;
-	url: string;
-};
+import {
+	PokemonDetail,
+	PokemonResult,
+} from "./Domain";
 
 type PokemonProps = {
-	selectedPokemon: Pokemon | null;
+	selectedPokemon: string | null;
 	setSelectedPokemon: React.Dispatch<
-		React.SetStateAction<Pokemon | null>
+		React.SetStateAction<string | null>
 	>;
 	pokemonResult: PokemonResult | null;
 	pageCount: number;
 	loadPaginationData: (
 		page: number
 	) => void;
+	pokemonDetail: PokemonDetail | null;
+	loadDetail: (
+		url: string
+	) => Promise<void>;
 };
 
 export const PokemonContext =
@@ -40,7 +38,7 @@ export const PokemonProvider: React.FC<{
 	const [
 		selectedPokemon,
 		setSelectedPokemon,
-	] = React.useState<Pokemon | null>(
+	] = React.useState<string | null>(
 		null
 	);
 
@@ -52,21 +50,32 @@ export const PokemonProvider: React.FC<{
 	);
 	const [pageCount, setPageCount] =
 		useState<number>(0);
-
+	const [
+		pokemonDetail,
+		setPokemonDetail,
+	] = useState<PokemonDetail | null>(
+		null
+	);
 	const fetchData = async (
 		apiUrl: string
 	) => {
-		const response = await fetch(
-			`${apiUrl}`
-		);
-		const pokemons =
-			(await response.json()) as PokemonResult;
-		const pageCount = Math.ceil(
-			pokemons.count / ITEMS_PER_PAGE
-		);
-		console.log(pokemons);
-		setPokemonResult(pokemons);
-		setPageCount(pageCount);
+		try {
+			const response = await fetch(
+				`${apiUrl}`
+			);
+			const pokemons =
+				(await response.json()) as PokemonResult;
+			const pageCount = Math.ceil(
+				pokemons.count / ITEMS_PER_PAGE
+			);
+			setPokemonResult(pokemons);
+			setPageCount(pageCount);
+		} catch (error) {
+			console.error(
+				"Error loading pokemon list:",
+				error
+			);
+		}
 	};
 	useEffect(() => {
 		fetchData(BASE_URL);
@@ -81,6 +90,23 @@ export const PokemonProvider: React.FC<{
 		fetchData(url);
 	};
 
+	const loadDetail = async (
+		url: string
+	) => {
+		try {
+			const response = await fetch(
+				`${url}`
+			);
+			const pokemonDetails =
+				(await response.json()) as PokemonDetail;
+			setPokemonDetail(pokemonDetails);
+		} catch (error) {
+			console.error(
+				"Error loading detail result:",
+				error
+			);
+		}
+	};
 	return (
 		<PokemonContext.Provider
 			value={{
@@ -89,6 +115,8 @@ export const PokemonProvider: React.FC<{
 				pokemonResult,
 				pageCount,
 				loadPaginationData,
+				pokemonDetail,
+				loadDetail,
 			}}>
 			{children}
 		</PokemonContext.Provider>

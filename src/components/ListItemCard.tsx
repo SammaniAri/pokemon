@@ -30,10 +30,12 @@ const ListItemCard = (
 		selectedName: string,
 		selectedUrl: string
 	) => {
-		pokemonContext?.setSelectedPokemon({
-			name: selectedName,
-			url: selectedUrl,
-		});
+		pokemonContext?.loadDetail(
+			selectedUrl
+		);
+		pokemonContext?.setSelectedPokemon(
+			selectedName
+		);
 		navigate("/pokemondetail");
 	};
 	return (

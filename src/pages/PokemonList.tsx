@@ -8,8 +8,8 @@ import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
 import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
-import { Pokemon } from "../context/PokemonContext";
 import { PokemonContext } from "../context/PokemonContext";
+import { Pokemon } from "../context/Domain";
 
 const PokemonList = () => {
 	const pokemonContext = useContext(
