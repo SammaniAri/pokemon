@@ -1,46 +1,66 @@
-# Getting Started with Create React App
+<!-- @format -->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pokémon Explorer App
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+The Pokémon Explorer App is a mini web application built using React and TypeScript. It allows users to explore a list of Pokémon and view detailed information about each Pokémon, including their name, abilities, and image. The application consists of two main pages: a Pokémon list page and a Pokémon detail page.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Pokémon List Page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Displays a paginated list of Pokémon names.
+- Allows users to click on a Pokémon name to view its detailed information.
 
-### `npm test`
+### Pokémon Detail Page
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Displays the Pokémon's name, a list of its abilities, and an image.
+- Includes a button to navigate back to the Pokémon list page.
 
-### `npm run build`
+### Styling
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Responsive design for both pages to ensure a good user experience on various devices.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- TypeScript
+- CSS (for styling)
+- Material UI (for styling)
+- PokéAPI (for fetching Pokémon data)
 
-### `npm run eject`
+## Setup and Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Clone the Repository
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+````bash
+- git clone git@github.com:SammaniAri/pokemon.git
+- cd pokemon
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Install Dependencies
+- Make sure you have Node.js and npm installed. Then run:
+```bash
+- npm install
+- Run the Application
+- bash
+- Copy code
+- npm start
+- The app will be available at http://localhost:3000.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Styling
+- The application uses CSS as well as Material UI for styling to ensure that the design is responsive to provide a good user experience on both desktop and mobile devices.
 
-## Learn More
+## Acknowledgments
+- PokéAPI for providing the Pokémon data.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
+- sammani.ari@gmail.com for any questions or feedback, please contact sammani.ari@gmail.com
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+
+````
