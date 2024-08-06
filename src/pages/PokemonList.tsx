@@ -1,5 +1,6 @@
 /** @format */
 import {
+	useContext,
 	useEffect,
 	useState,
 } from "react";
@@ -7,35 +8,27 @@ import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
 import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
-import { Pokemon } from "../context/PokemonContext";
-
-const BASE_URL =
-	"https://pokeapi.co/api/v2/pokemon/?offset=0&limit=8";
-
-type PokemonResult = {
-	count: number;
-	next: string;
-	previous: string;
-	results: Pokemon[];
-};
+import {
+	Pokemon,
+	PokemonResult,
+} from "../context/PokemonContext";
+import { PokemonContext } from "../context/PokemonContext";
 
 const PokemonList = () => {
-	const [pokemons, setPokemons] =
-		useState<Pokemon[]>([]);
+	const pokemonContext = useContext(
+		PokemonContext
+	);
+
+	const [
+		pokemonsList,
+		setPokemonsList,
+	] = useState<Pokemon[]>();
 	useEffect(() => {
-		const fetchPokemons = async () => {
-			const response = await fetch(
-				`${BASE_URL}`
-			);
-			const pokemons =
-				(await response.json()) as PokemonResult;
-
-			console.log(pokemons);
-			setPokemons(pokemons.results);
-		};
-
-		fetchPokemons();
-	}, []);
+		const list =
+			pokemonContext?.pokemonResult
+				?.results;
+		setPokemonsList(list);
+	}, [pokemonContext?.pokemonResult]);
 
 	return (
 		<div className="Screen">
@@ -46,7 +39,7 @@ const PokemonList = () => {
 			</div>
 
 			<div className="Wrapper">
-				{pokemons.map((item) => (
+				{pokemonsList?.map((item) => (
 					<div
 						key={item.name}
 						className="component-container">
