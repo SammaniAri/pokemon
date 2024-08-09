@@ -11,7 +11,6 @@ import {
 	CardActionArea,
 	CardActions,
 } from "@mui/material";
-import "../assets/data.json";
 import { PokemonContext } from "../context/PokemonContext";
 
 type Pokemon = {
