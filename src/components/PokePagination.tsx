@@ -3,6 +3,7 @@
 import Pagination from "@mui/material/Pagination";
 import { PokemonContext } from "../context/PokemonContext";
 import { useContext, useState, useEffect } from "react";
+import { Box } from "@mui/material";
 
 const PokePagination = () => {
   const pokemonContext = useContext(PokemonContext);
@@ -16,14 +17,14 @@ const PokePagination = () => {
     pokemonContext?.loadPaginationData(value);
   };
   return (
-    <div style={{ margin: 8 }}>
+    <Box sx={{ margin: 1 }}>
       <Pagination
         count={numberOfPages}
         variant="outlined"
         shape="rounded"
         onChange={handleChange}
       />
-    </div>
+    </Box>
   );
 };
 export default PokePagination;

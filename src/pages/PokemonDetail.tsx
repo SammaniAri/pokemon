@@ -1,7 +1,7 @@
 /** @format */
 import { useContext, useState, useEffect } from "react";
 import { PokemonContext } from "../context/PokemonContext";
-import "./PokemonDetail.css";
+//import "./PokemonDetail.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -20,24 +20,35 @@ const PokemonDetailComponent = () => {
     setPokemonDetail(pokemonContext?.pokemonDetail);
   }, [pokemonContext?.pokemonDetail]);
   return (
-    <div className="DetailScreen">
+    <Box
+      sx={{
+        height: "100vh",
+        backgroundColor: "#f3feb8",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Card
-        sx={{ maxWidth: 345 }}
-        style={{
-          margin: 8,
+        sx={{
+          maxWidth: 345,
+          margin: 1,
           backgroundColor: "#fbffea",
         }}
       >
         <CardActionArea>
           <Box
-            display="flex"
-            justifyContent="right"
-            alignItems="center"
-            height={200}
+            sx={{
+              display: "flex",
+              justifyContent: "right",
+              alignItems: "center",
+              height: 200,
+            }}
           >
             <CardMedia
               component="img"
-              style={{
+              sx={{
                 height: 200,
                 width: 200,
               }}
@@ -51,7 +62,7 @@ const PokemonDetailComponent = () => {
               {selectedPokemon ? selectedPokemon : "Name"}
             </Typography>
 
-            <div>
+            <Box>
               <Typography variant="body2" color="text.secondary" width="400px">
                 LIST OF ABILITIES
               </Typography>
@@ -64,7 +75,7 @@ const PokemonDetailComponent = () => {
                   {item.ability.name}
                 </Typography>
               ))}
-            </div>
+            </Box>
           </CardContent>
         </CardActionArea>
         <CardActions>
@@ -75,7 +86,7 @@ const PokemonDetailComponent = () => {
           </NavLink>
         </CardActions>
       </Card>
-    </div>
+    </Box>
   );
 };
 export default PokemonDetailComponent;

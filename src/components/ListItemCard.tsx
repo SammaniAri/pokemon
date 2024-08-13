@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Box, Button, CardActionArea, CardActions } from "@mui/material";
 import { PokemonContext } from "../context/PokemonContext";
 
 type Pokemon = {
@@ -23,11 +23,11 @@ const ListItemCard = (props: Pokemon) => {
     navigate("/pokemondetail");
   };
   return (
-    <div style={{ width: 400 }}>
+    <Box style={{ width: 400 }}>
       <Card
-        sx={{ maxWidth: 345 }}
-        style={{
-          margin: 8,
+        sx={{
+          maxWidth: 345,
+          margin: 1,
           backgroundColor: "#fbffea",
         }}
       >
@@ -49,7 +49,7 @@ const ListItemCard = (props: Pokemon) => {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </Box>
   );
 };
 export default ListItemCard;
