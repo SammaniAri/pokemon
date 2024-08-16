@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from "react";
 import PokePagination from "../components/PokePagination";
 import ListItemCard from "../components/ListItemCard";
-//import "./PokemonList.css";
 import Typography from "@mui/material/Typography";
 import { PokemonContext } from "../context/PokemonContext";
 import { Pokemon } from "../context/Domain";

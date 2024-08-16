@@ -3,8 +3,8 @@ import React, { createContext, useState, useEffect } from "react";
 import { PokemonDetail, PokemonResult } from "./Domain";
 
 type PokemonProps = {
-  selectedPokemon: string | null;
-  setSelectedPokemon: React.Dispatch<React.SetStateAction<string | null>>;
+  //selectedPokemon: string | null;
+  //setSelectedPokemon: React.Dispatch<React.SetStateAction<string | null>>;
   pokemonResult: PokemonResult | null;
   pageCount: number;
   loadPaginationData: (page: number) => void;
@@ -18,10 +18,6 @@ const ITEMS_PER_PAGE = 8;
 export const PokemonProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [selectedPokemon, setSelectedPokemon] = React.useState<string | null>(
-    null
-  );
-
   const [pokemonResult, setPokemonResult] = useState<PokemonResult | null>(
     null
   );
@@ -62,8 +58,8 @@ export const PokemonProvider: React.FC<{
   return (
     <PokemonContext.Provider
       value={{
-        selectedPokemon,
-        setSelectedPokemon,
+        //selectedPokemon,
+        //setSelectedPokemon,
         pokemonResult,
         pageCount,
         loadPaginationData,

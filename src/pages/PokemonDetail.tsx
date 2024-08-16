@@ -1,24 +1,33 @@
 /** @format */
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { PokemonContext } from "../context/PokemonContext";
-//import "./PokemonDetail.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
 import { Button, CardActionArea, CardActions, Box } from "@mui/material";
-import { Ability, PokemonDetail } from "../context/Domain";
+import { Ability } from "../context/Domain";
 
 const PokemonDetailComponent = () => {
+  const { name } = useParams();
   const pokemonContext = useContext(PokemonContext);
-  const selectedPokemon = pokemonContext?.selectedPokemon;
-
-  const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail | null>();
 
   useEffect(() => {
-    setPokemonDetail(pokemonContext?.pokemonDetail);
-  }, [pokemonContext?.pokemonDetail]);
+    if (name && pokemonContext?.pokemonResult) {
+      const selectedPokemon = pokemonContext.pokemonResult.results.find(
+        (pokemon) => pokemon.name === name
+      );
+      if (selectedPokemon) {
+        pokemonContext.loadDetail(selectedPokemon.url);
+      }
+    }
+  }, [name, pokemonContext]);
+
+  // Access the loaded pokemon detail
+  const pokemonDetail = pokemonContext?.pokemonDetail;
+
   return (
     <Box
       sx={{
@@ -53,13 +62,13 @@ const PokemonDetailComponent = () => {
                 width: 200,
               }}
               image={pokemonDetail?.sprites?.front_default}
-              alt="green iguana"
+              alt={name}
             />
           </Box>
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {selectedPokemon ? selectedPokemon : "Name"}
+              {name ? name : "Name"}
             </Typography>
 
             <Box>
