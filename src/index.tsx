@@ -9,18 +9,16 @@ import { BrowserRouter } from "react-router-dom";
 import { PokemonProvider } from "./context/PokemonContext";
 
 const root = ReactDOM.createRoot(
-	document.getElementById(
-		"root"
-	) as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<PokemonProvider>
-				<App />
-			</PokemonProvider>
-		</BrowserRouter>
-	</React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <PokemonProvider>
+        <App />
+      </PokemonProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

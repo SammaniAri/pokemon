@@ -1,116 +1,101 @@
 /** @format */
-import {
-	useContext,
-	useState,
-	useEffect,
-} from "react";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { PokemonContext } from "../context/PokemonContext";
-import "./PokemonDetail.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
-import {
-	Button,
-	CardActionArea,
-	CardActions,
-	Box,
-} from "@mui/material";
-import {
-	Ability,
-	PokemonDetail,
-} from "../context/Domain";
+import { Button, CardActionArea, CardActions, Box } from "@mui/material";
+import { Ability } from "../context/Domain";
 
 const PokemonDetailComponent = () => {
-	const pokemonContext = useContext(
-		PokemonContext
-	);
-	const selectedPokemon =
-		pokemonContext?.selectedPokemon;
+  const { name } = useParams();
+  const pokemonContext = useContext(PokemonContext);
 
-	const [
-		pokemonDetail,
-		setPokemonDetail,
-	] = useState<PokemonDetail | null>();
+  useEffect(() => {
+    if (name && pokemonContext?.pokemonResult) {
+      const selectedPokemon = pokemonContext.pokemonResult.results.find(
+        (pokemon) => pokemon.name === name
+      );
+      if (selectedPokemon) {
+        pokemonContext.loadDetail(selectedPokemon.url);
+      }
+    }
+  }, [name, pokemonContext]);
 
-	useEffect(() => {
-		setPokemonDetail(
-			pokemonContext?.pokemonDetail
-		);
-	}, [pokemonContext?.pokemonDetail]);
-	return (
-		<div className="DetailScreen">
-			<Card
-				sx={{ maxWidth: 345 }}
-				style={{
-					margin: 8,
-					backgroundColor: "#fbffea",
-				}}>
-				<CardActionArea>
-					<Box
-						display="flex"
-						justifyContent="right"
-						alignItems="center"
-						height={200}>
-						<CardMedia
-							component="img"
-							style={{
-								height: 200,
-								width: 200,
-							}}
-							image={
-								pokemonDetail?.sprites
-									?.front_default
-							}
-							alt="green iguana"
-						/>
-					</Box>
+  // Access the loaded pokemon detail
+  const pokemonDetail = pokemonContext?.pokemonDetail;
 
-					<CardContent>
-						<Typography
-							gutterBottom
-							variant="h5"
-							component="div">
-							{selectedPokemon
-								? selectedPokemon
-								: "Name"}
-						</Typography>
+  return (
+    <Box
+      sx={{
+        height: "100vh",
+        backgroundColor: "#f3feb8",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card
+        sx={{
+          maxWidth: 345,
+          margin: 1,
+          backgroundColor: "#fbffea",
+        }}
+      >
+        <CardActionArea>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "right",
+              alignItems: "center",
+              height: 200,
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{
+                height: 200,
+                width: 200,
+              }}
+              image={pokemonDetail?.sprites?.front_default}
+              alt={name}
+            />
+          </Box>
 
-						<div>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-								width="400px">
-								LIST OF ABILITIES
-							</Typography>
-							{pokemonDetail?.abilities.map(
-								(item: Ability) => (
-									<Typography
-										variant="body2"
-										color="text.secondary"
-										key={
-											item.ability.name
-										}>
-										{item.ability.name}
-									</Typography>
-								)
-							)}
-						</div>
-					</CardContent>
-				</CardActionArea>
-				<CardActions>
-					<NavLink to="/">
-						<Button
-							size="small"
-							color="primary"
-							variant="outlined">
-							Go Back
-						</Button>
-					</NavLink>
-				</CardActions>
-			</Card>
-		</div>
-	);
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {name ? name : "Name"}
+            </Typography>
+
+            <Box>
+              <Typography variant="body2" color="text.secondary" width="400px">
+                LIST OF ABILITIES
+              </Typography>
+              {pokemonDetail?.abilities.map((item: Ability) => (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  key={item.ability.name}
+                >
+                  {item.ability.name}
+                </Typography>
+              ))}
+            </Box>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <NavLink to="/">
+            <Button size="small" color="primary" variant="outlined">
+              Go Back
+            </Button>
+          </NavLink>
+        </CardActions>
+      </Card>
+    </Box>
+  );
 };
 export default PokemonDetailComponent;
