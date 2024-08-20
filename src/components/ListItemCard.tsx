@@ -4,9 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { Box, Button, CardActionArea, CardActions } from "@mui/material";
-import { PokemonContext } from "../context/PokemonContext";
 
 type Pokemon = {
   name: string;
@@ -15,7 +13,7 @@ type Pokemon = {
 
 const ListItemCard = (props: Pokemon) => {
   const navigate = useNavigate();
-  const pokemonContext = useContext(PokemonContext);
+
   const navigateToDetail = (selectedName: string, selectedUrl: string) => {
     navigate(`/pokemondetail/${selectedName}`);
   };
